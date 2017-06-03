@@ -59,9 +59,10 @@ extern "C" {
 #define SVCALL(number, return_type, signature)          \
   _Pragma("GCC diagnostic push")                        \
   _Pragma("GCC diagnostic ignored \"-Wreturn-type\"")   \
+  __attribute__((weak))                                 \
   __attribute__((naked))                                \
   __attribute__((unused))                               \
-  static return_type signature                          \
+  return_type signature                                 \
   {                                                     \
     __asm(                                              \
         "svc %0\n"                                      \
